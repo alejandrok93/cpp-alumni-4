@@ -80,6 +80,8 @@ public class LoginServlet extends HttpServlet {
      email = request.getParameter("email");
      password = request.getParameter("password");
     
+     
+     connectToDB();
     
     
     }
@@ -98,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 
 public void connectToDB() {
     try {
-    String DBurl = "jdbc:mysql://localhost:8080/cpp-alumni";
+    String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
     String user = "root";
     String pass = "root";
     
