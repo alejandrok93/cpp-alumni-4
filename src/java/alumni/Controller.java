@@ -16,8 +16,8 @@ import java.util.Set;
 public class Controller {
     
     String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    String user = "root";
-    String pass = "sesame";
+    String user = "alejandro";
+    String pass = "Test123";
     
     public void Controller() {
         
@@ -187,6 +187,34 @@ public class Controller {
            e.getMessage();
        }
     
+    }
+    
+    
+    public void updateAccount(int userID, String phone, String description) {
+        
+        try {
+        //connect to DB
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, user, pass);
+        
+        String query = "UPDATE users SET phone = ?, description = ? WHERE id = ?";
+ 
+        PreparedStatement ps = conn.prepareStatement(query);
+        
+        
+        ps.setString(1, phone);
+        ps.setString(2, description);
+        ps.setInt(3, userID);
+        
+        ps.executeUpdate();
+        
+        }
+        
+        
+        catch (SQLException e) {
+            e.getMessage();
+        }
+        
     }
 
 
