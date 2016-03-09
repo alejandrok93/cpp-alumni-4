@@ -4,7 +4,7 @@
     Author     : James
 --%>
 <%@include file="header_user.jsp" %>
-    <img class="homepageImg"
+    <img class="img img-responsive text-center"
          src="<%= request.getContextPath()%>/img/cpp_center.jpg"
          alt="Cal Poly Pomona Logo"/>
     <br>

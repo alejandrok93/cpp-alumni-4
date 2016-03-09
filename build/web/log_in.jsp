@@ -6,7 +6,9 @@
 <%@include file="header_notlog.jsp" %>
 <div id="box">
     <h2>Log In</h2>
+   
     <%@include file="error.jsp" %>
+    
     <form action="LoginServlet" method="post">
         <table width="100%" cellpadding="2">
         <tr>

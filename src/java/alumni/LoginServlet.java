@@ -24,6 +24,9 @@ public class LoginServlet extends HttpServlet {
     String email;
     String password;
     
+    //instanciate controller object
+    Controller ctrl = new Controller();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,16 +38,40 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        //response.setContentType("text/html;charset=UTF-8");
+       
+        email = request.getParameter("email");
+     password = request.getParameter("password");
+    
+     
+    boolean emailExists =  ctrl.doesEmailExist(email);
+    boolean passExists = ctrl.doesPasswordExist(password);
+        
+     
+    if (emailExists && passExists) {
+        response.sendRedirect("home.jsp");
+        
+    }
+    
+    else {
+        String error = "Email or Password not found. Try again";
+        response.sendRedirect("log_in.jsp?error=" + error);
+     
+    }
+        
+        
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. 
             Need to check if is actual user then pass user info to the header_user.jsp
             */
-          String url = response.encodeURL("/home.jsp");
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+//          String url = response.encodeURL("/home.jsp");
+//            RequestDispatcher dispatcher =
+//                    getServletContext().getRequestDispatcher(url);
+//            dispatcher.forward(request, response);
             
+            out.print(emailExists);
+            out.print(passExists);
         }
     }
 
@@ -76,11 +103,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     
-     email = request.getParameter("email");
-     password = request.getParameter("password");
-    
-     
-     connectToDB();
      
     
     }
@@ -98,35 +120,35 @@ public class LoginServlet extends HttpServlet {
 
 
 public void connectToDB() {
-    try {
-    String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    String user = "root";
-    String pass = "sesame";
-    
-   
-    Connection conn = DriverManager.getConnection(DBurl, user, pass);
-   
-    if (conn.isValid(10)) {
-        System.out.println("Connection succesful!");
-    }
-    
-    else {
-        System.out.println("Connection failed");
-    }
-    Statement stmt = conn.createStatement();
-    
-    ResultSet users  = stmt.executeQuery("SELECT * FROM users");
-    System.out.print(users);
-    
-    
-    
-    }
-    
-    catch (SQLException e) {
-        for (Throwable t : e )
-            t.printStackTrace();
-    }
-    
+//    try {
+//    String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
+//    String user = "root";
+//    String pass = "sesame";
+//    
+//   
+//    Connection conn = DriverManager.getConnection(DBurl, user, pass);
+//   
+//    if (conn.isValid(10)) {
+//        System.out.println("Connection succesful!");
+//    }
+//    
+//    else {
+//        System.out.println("Connection failed");
+//    }
+//    Statement stmt = conn.createStatement();
+//    
+//    ResultSet users  = stmt.executeQuery("SELECT * FROM users");
+//    System.out.print(users);
+//    
+//    
+//    
+//    }
+//    
+//    catch (SQLException e) {
+//        for (Throwable t : e )
+//            t.printStackTrace();
+//    }
+//    
     
 }
 

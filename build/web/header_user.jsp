@@ -22,6 +22,11 @@ Need classes to import a DB request, then need to pull up the USER info
              td {
     padding: 10px;
 }
+
+img {
+    height: 20%;
+    width: 20%;
+}
             </style>
     
         <title>JSP Page</title>
@@ -32,17 +37,21 @@ Need classes to import a DB request, then need to pull up the USER info
                     
                     <image src="<%= request.getContextPath()%>/img/cpp_logo.png" style="float: left; padding-left: 5px; padding-top: 5px;"/></a>
                 <br>
-               
-                    <a class="header" href="<%= request.getContextPath()%>/home.jsp">&nbsp;&nbsp;CPP Alumni Network</a>
+              
             
             </div>
-        <table cellpadding="10">
-            <tr>
-                <td>Logout</td>
-                <td>Search</td>
-                <td><a href="<%= response.encodeURL(request.getContextPath() + "/profile.jsp")%>">Profile</a></td>
-                <td>Friends</td>
-            </tr>
-            
-        </table>
+                    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= request.getContextPath()%>/home.jsp">CPP Alumni Network</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Logout</a></li>
+      <li><a href="#">Search</a></li>
+      <li><a href="profile.jsp">Profile</a></li>
+      <li><a href="#">Friends</a></li>
+    </ul>
+  </div>
+</nav>
         
