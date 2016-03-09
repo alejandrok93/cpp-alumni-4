@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import javax.servlet.*;
 
 /**
  *
@@ -36,17 +37,14 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-           
+            /* TODO output your page here. You may use following sample code. 
+            Need to check if is actual user then pass user info to the header_user.jsp
+            */
+          String url = response.encodeURL("/home.jsp");
+            RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(url);
+            dispatcher.forward(request, response);
+            
         }
     }
 
@@ -102,8 +100,8 @@ public class LoginServlet extends HttpServlet {
 public void connectToDB() {
     try {
     String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    String user = "alejandro";
-    String pass = "Test123";
+    String user = "root";
+    String pass = "sesame";
     
    
     Connection conn = DriverManager.getConnection(DBurl, user, pass);
