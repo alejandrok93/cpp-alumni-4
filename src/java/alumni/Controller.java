@@ -188,6 +188,34 @@ public class Controller {
        }
     
     }
+    
+    
+    public void updateAccount(int userID, String phone, String description) {
+        
+        try {
+        //connect to DB
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, user, pass);
+        
+        String query = "UPDATE users SET phone = ?, description = ? WHERE id = ?";
+ 
+        PreparedStatement ps = conn.prepareStatement(query);
+        
+        
+        ps.setString(1, phone);
+        ps.setString(2, description);
+        ps.setInt(3, userID);
+        
+        ps.executeUpdate();
+        
+        }
+        
+        
+        catch (SQLException e) {
+            e.getMessage();
+        }
+        
+    }
 
 
 }

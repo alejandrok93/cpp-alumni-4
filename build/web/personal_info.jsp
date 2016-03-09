@@ -30,7 +30,7 @@
                         
                         --%>
                         
-                        <form action="userInfoServlet" method="post">
+                        <form action="UpdateAccountServlet" method="post">
                             <table cellspacing="5" border="0">
                                 <tr>
                                     <td align="left">First Name: *</td>
@@ -55,13 +55,13 @@
 
                                 <tr>
                                     <td align="left">Cell Phone:</td>
-                                    <td><input type="text" name="Cell Phone" size="50"/></td>
+                                    <td><input type="text" name="phone" size="50"/></td>
                                 </tr>
                                
 
                                 <tr>
                                     <td align="left" style="position: relative; bottom: 30px;">About Me:</td>
-                                    <td><textarea name="aboutMe" rows="3" cols="37"></textarea></td>
+                                    <td><textarea name="desc" rows="3" cols="37"></textarea></td>
                                 </tr>
                                
                                 <tr>
