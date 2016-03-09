@@ -9,8 +9,79 @@ and open the template in the editor.
         <title>Register</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="container">
+       
+            <form action="RegisterServlet" method="POST">
+               <div class="form-group">
+                <label>First Name:</label>
+                <input type="text" name="firstName" placeholder="First Name" required>
+               </div>
+                
+                <div class="form-group">
+                 <label>Last Name:</label>
+                <input type="text" name="lastName" placeholder="Last Name" required>
+                </div>
+                
+                <div class="form-group">
+                 <label>Diploma Last Name:</label>
+                <input type="text" name="lastNameInDiploma" placeholder="Last Name in Diploma">
+                </div>
+                
+                <div class="form-group">
+                 <label>Email:</label>
+                <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="form-group">
+                 <label>Password:</label>
+                <input type="password" name="password" placeholder="Password" required>
+                </div>
+                
+                <div class="form-group">
+                 <label>Repeat Password:</label>
+                <input type="password" name="password2" placeholder="Repeat Password" required>
+                </div>
+                
+                <div class="form-group">
+                <label>Year of Graduation:</label>
+                <select name="yearGraduated">
+                    <option value="2014">2014</option>
+                    <option value="2015">2016</option>
+                    <option value="2016">2016</option>
+                </select>
+                </div>
+                
+                <div class="form-group">
+                <label>Degree:</label>  
+                <select name="degree">
+                    <option value="bs">BS</option>
+                    <option value="msba">MSBA</option>
+                    <option value="mba">MBA</option>
+                </select>
+                </div>
+                
+                <div class="form-group">
+                <label>Major:</label>  
+                <select name="major">
+                    <option value="accounting">Accounting</option>
+                    <option value="cis">CIS</option>
+                    <option value="finance">Finance</option>
+                    <option value="management">Management</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="msba">MSBA</option>
+                    <option value="mba">MBA</option>
+                </select>
+                </div>
+                
+                <button type="submit" class="btn btn-default">Submit</button>
+                
+            </form>
+            
+        </div>
+        </div>
     </body>
 </html>

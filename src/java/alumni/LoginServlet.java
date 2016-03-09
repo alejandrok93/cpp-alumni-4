@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+           
         }
     }
 
@@ -82,7 +83,7 @@ public class LoginServlet extends HttpServlet {
     
      
      connectToDB();
-    
+     
     
     }
 
@@ -105,6 +106,14 @@ public void connectToDB() {
     String pass = "root";
     
     Connection conn = DriverManager.getConnection(DBurl, user, pass);
+    
+    Statement stmt = conn.createStatement();
+    
+    ResultSet users  = stmt.executeQuery("SELECT * FROM users");
+    System.out.print(users);
+    
+    
+    
     }
     
     catch (SQLException e) {
