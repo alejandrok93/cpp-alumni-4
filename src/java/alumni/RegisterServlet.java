@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegisterServlet extends HttpServlet {
 
+    Controller ctrl = new Controller();
     
     String firstName;
     String lastName;
@@ -29,6 +30,8 @@ public class RegisterServlet extends HttpServlet {
     String graduationYear;
     String degree;
     String major;
+    
+ 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,24 +43,43 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
         
-          String url = response.encodeURL("/personal_info.jsp");
-            RequestDispatcher dispatcher =
-                    getServletContext().getRequestDispatcher(url);
-            dispatcher.forward(request, response);
+          String error = "";
+     
+            
+        if (firstName.equals("") || firstName.equals("")) {
+            error += "Name cannot be left blank.  ";
+        
         }
+       
+        
+        
+        if (diplomaLastName.equals("")) {  
+            diplomaLastName = lastName;
+        }
+        
+        if (password.equals("") || password2.equals("")) {
+            error += "Please enter a password.  ";
+        }
+        
+        if (!password.equals(password2)) {
+            error += "Passwords are not equal. Please Try again.  ";
+            error += "\n";
+        }
+        
+        
+        if (error.isEmpty()) {
+        ctrl.registerUser(firstName, lastName,  email, password, graduationYear, degree, major);
+        response.sendRedirect("log_in.jsp");
+        }
+        
+        else {
+       
+            response.sendRedirect("sign_up.jsp?error=" + error);
+            
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,7 +108,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     
         firstName = request.getParameter("firstName");
         lastName = request.getParameter("lastName");
@@ -100,8 +122,15 @@ public class RegisterServlet extends HttpServlet {
         
         
         System.out.println(firstName);
-        System.err.println(major);
+        System.out.println(lastName);
+        System.out.println(diplomaLastName);
+        System.out.println(email);
+        System.out.println(password);
+        System.out.println(password2);
+        System.out.println(degree);
+        System.out.println(major);
     
+        processRequest(request, response);
     
     }
 

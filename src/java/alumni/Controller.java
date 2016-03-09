@@ -6,6 +6,8 @@
 package alumni;
 
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -152,6 +154,40 @@ public class Controller {
 
     }
 
+    
+    
+    public void registerUser(String firstName, String lastName, String email, String password, 
+            String graduatedYear, String degree, String major) {
+        
+       try {
+        //connect to DB
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, user, pass);
+        
+        String query = "INSERT INTO users "
+                + "(first_name, last_name, email, password, year_graduated, degree, major)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        PreparedStatement ps = conn.prepareStatement(query);
+
+     ps.setString(1, firstName);
+     ps.setString(2, lastName);
+    
+     ps.setString(3, email);
+     ps.setString(4, password);
+     ps.setString(5, graduatedYear);
+     ps.setString(6, degree);
+     ps.setString(7, major);
+     
+     ps.executeUpdate();
+
+       }
+       
+       catch (SQLException e) {
+           e.getMessage();
+       }
+    
+    }
 
 
 }
