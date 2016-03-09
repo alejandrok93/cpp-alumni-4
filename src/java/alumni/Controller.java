@@ -16,8 +16,8 @@ import java.util.Set;
 public class Controller {
     
     String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    String user = "alejandro";
-    String pass = "Test123";
+    String user = "root";
+    String pass = "sesame";
     
     public void Controller() {
         

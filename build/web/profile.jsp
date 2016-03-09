@@ -19,14 +19,12 @@
     <sql:query var="listUsers"   dataSource="${myDS}">
         SELECT * FROM users WHERE email='alejandro@email.com';
     </sql:query>
-          <sql:query var="usersWork"   dataSource="${myDS}">
-        SELECT * FROM employment WHERE email='alejandro@email.com';
+      
+            <sql:query var="usersWork"   dataSource="${myDS}">
+        SELECT * FROM employment INNER JOIN users ON employment.user_id=users.id WHERE user_id='1';
     </sql:query>
-         <sql:query var="usersEducation"   dataSource="${myDS}">
-        SELECT * FROM users WHERE email='alejandro@email.com';
-    </sql:query>
-        
-<title>Profile Information</title>
+      
+<h1>Profile Information</h1>
 
 
 <center>
@@ -117,23 +115,36 @@
 
 
                                 <table   style="margin: 12px;" align="left" cellspacing="5" border="0" width="560">
-                                    <tr>
-                                        <td align="left">Current Employer: [Cal Poly Pomona]</td>
+                                   
+                                    <c:forEach var="work" items="${usersWork.rows}">
+                                        <tr>
+                                        <td align="left">Current Employer: 
+                                        <c:out value="${work.employer}" />
+                                        </td>
                                         <td align="left">&nbsp;</td>
                                     </tr>
-
-                                    <tr>
-                                        <td align="left">Position: [position]</td>
-                                        <td>&nbsp;</td>
+                                        
+                                    
+                                       <tr>
+                                        <td align="left">Position: 
+                                        <c:out value="${work.position}" />
+                                        </td>
+                                        <td align="left">&nbsp;</td>
                                     </tr>
+                                    
+                                        <tr>
+                                        <td align="left">Work Phone: 
+                                        <c:out value="${work.phone}" />
+                                        </td>
+                                        <td align="left">&nbsp;</td>
+                                    </tr>
+                                    </c:forEach>
+                                    
 
                                     
 
-                                    <tr>
-                                        <td align="left">Work Phone: [workphone]</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                   
+                                    
+
                                   
                                 </table>
 
