@@ -64,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
         
         if (!password.equals(password2)) {
             error += "Passwords are not equal. Please Try again.  ";
-           
+            error += "\n";
         }
         
         
