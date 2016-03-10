@@ -3,8 +3,31 @@
     Created on : Mar 8, 2016, 11:47:44 PM
     Author     : James
 --%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
+
 <%@include file="/header_user.jsp" %>
-<title>Profile Information</title>
+
+  <sql:setDataSource
+        var="myDS"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/cpp-alumni"
+        user="root" password="sesame"
+    />
+     
+    <sql:query var="listUsers"   dataSource="${myDS}">
+        SELECT * FROM users WHERE email='<%=  session.getAttribute("user") %>';
+    </sql:query>
+      
+            <sql:query var="usersWork"   dataSource="${myDS}">
+        SELECT * FROM employment INNER JOIN users ON employment.user_id=users.id WHERE user_id='1';
+    </sql:query>
+        
+          <sql:query var="usersEducation"   dataSource="${myDS}">
+        SELECT * FROM education INNER JOIN users ON education.user_id=users.id WHERE user_id='1';
+    </sql:query>
+<h1>Profile Information</h1>
 
 
 <center>
@@ -17,13 +40,19 @@
                     <tr>
                         <td rowspan="3" >
                             
-                        <td><h2>[FirstName LastName ]</h2></td>
+                        <c:forEach var="user" items="${listUsers.rows}">
+                <tr>
+                 
+                    <td><h2><c:out value="${user.first_name}" /> </h2></td>
+                    <td><h2><c:out value="${user.last_name}" /> </h2></td>
+                    
+                                 </c:forEach> 
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td>&nbsp;<%=  session.getAttribute("user") %></td>
 
                     </tr>
                     <tr>
-                        <td>[Mascot at Cal Poly Pomona]</td>
+                       
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -58,21 +87,19 @@
 
                                 <table style="margin: 12px;"  align="left" cellspacing="5" border="0" width="560">
                                     
-                                    <tr>
-                                        
-                                        <td align="left">Email: <%=  session.getAttribute("user") %></td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Home Phone: [home phone]</td>
-                                        <td align="right">Cell Phone: [cell phone]</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">About Me: [about description]</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
+                                    
+                                     <c:forEach var="user" items="${listUsers.rows}">
+                <tr>
+                 <tr>
+                     <td align="left">Email: <c:out value="${user.email}" /></td>
+                 </tr>
+                 <tr>
+                      <td align="left">Cell Phone:<c:out value="${user.phone}" /></td>
+                 </tr>
+                 <tr>
+                      <td align="left">About Me:<c:out value="${user.description}" /></td>
+                </tr>
+            </c:forEach>
                                     
                                    
 
@@ -86,22 +113,31 @@
 
 
                                 <table   style="margin: 12px;" align="left" cellspacing="5" border="0" width="560">
-                                    <tr>
-                                        <td align="left">Current Employer: [Cal Poly Pomona]</td>
+                                    
+                                    <c:forEach var="work" items="${usersWork.rows}">
+                                        <tr>
+                                        <td align="left">Current Employer: 
+                                        <c:out value="${work.employer}" />
+                                        </td>
                                         <td align="left">&nbsp;</td>
                                     </tr>
-
-                                    <tr>
-                                        <td align="left">Position: [mascot]</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-
+                                        
                                     
-
-                                    <tr>
-                                        <td align="left">Work Phone: [workphone]</td>
-                                        <td>&nbsp;</td>
+                                       <tr>
+                                        <td align="left">Position: 
+                                        <c:out value="${work.position}" />
+                                        </td>
+                                        <td align="left">&nbsp;</td>
                                     </tr>
+                                    
+                                        <tr>
+                                        <td align="left">Work Phone: 
+                                        <c:out value="${work.work_phone}" />
+                                        </td>
+                                        <td align="left">&nbsp;</td>
+                                    </tr>
+                                    </c:forEach>
+                                    
                                    
                                   
                                 </table>
@@ -114,40 +150,20 @@
 
 
                                 <table   style="margin: 12px;" align="left" cellspacing="5" border="0" width="560">
-                                    <tr>
-                                        <td align="left">Institution: [Cal Poly Pomona]</td>
-                                        <td align="left">&nbsp;</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">Degree: [bachelors]</td>
-                                        <td align="right">Major: [CIS]</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Graduation Year: [year]</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2"><hr></td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">Institution: [Cal Poly Pomona]</td>
-                                        <td align="left">&nbsp;</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">Degree: [bachelors]</td>
-                                        <td align="right">Major: [CIS]</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Graduation Year: [year]</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
+                                   
+                                    
+                                   < c:forEach var="edu" items="${usersEducation.rows}">
+                <tr>
+                
+                 <tr>
+                      <td align="left">Degree:<c:out value="${edu.degree}" /></td>
+                      <td align="right">Major: <c:out value="${edu.major}" /></td>
+                 </tr>
+                 <tr>
+                      <td align="left">Graduation Year: <c:out value="${edu.year_graduated}" /></td>
+                </tr>
+            </c:forEach>
+                           
 
                                 </table>
 
