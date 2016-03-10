@@ -8,17 +8,17 @@
 <%@include file="/header_user.jsp" %>
 
  
-     
+
     <sql:query var="listUsers"   dataSource="${myDS}">
         SELECT * FROM users WHERE email='<%=  session.getAttribute("email") %>';
     </sql:query>
       
             <sql:query var="usersWork"   dataSource="${myDS}">
-        SELECT * FROM employment INNER JOIN users ON employment.user_id=users.id WHERE user_id=(SELECT id FROM users WHERE email='<%=  session.getAttribute("email") %>');
+        SELECT * FROM employment  WHERE user_id = '<%=  session.getAttribute("email") %>';
     </sql:query>
         
           <sql:query var="usersEducation"   dataSource="${myDS}">
-               SELECT * FROM education INNER JOIN users ON education.user_id=users.id WHERE user_id=(SELECT id FROM users WHERE email='<%=  session.getAttribute("email") %>');
+               SELECT * FROM education WHERE user_id = '<%=  session.getAttribute("email") %>';
         
     </sql:query>
 <h1 class="h1 text-center">Profile Information</h1>
@@ -144,7 +144,7 @@
                                 <table   style="margin: 12px;" align="left" cellspacing="5" border="0" width="560">
                                    
                                     
-                                   < c:forEach var="edu" items="${usersEducation.rows}">
+                                   <c:forEach var="edu" items="${usersEducation.rows}">
                 <tr>
                 
                  <tr>
