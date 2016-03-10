@@ -4,6 +4,16 @@
     Author     : James
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
+
+
+  <sql:setDataSource
+        var="myDS"
+        driver="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/cpp-alumni"
+        user="root" password="sesame"
+    />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
 Need classes to import a DB request, then need to pull up the USER info

@@ -4,28 +4,22 @@
     Author     : James
 --%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %> 
 
 <%@include file="/header_user.jsp" %>
 
-  <sql:setDataSource
-        var="myDS"
-        driver="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/cpp-alumni"
-        user="root" password="sesame"
-    />
+ 
      
     <sql:query var="listUsers"   dataSource="${myDS}">
         SELECT * FROM users WHERE email='<%=  session.getAttribute("email") %>';
     </sql:query>
       
             <sql:query var="usersWork"   dataSource="${myDS}">
-        SELECT * FROM employment INNER JOIN users ON employment.user_id=users.id WHERE user_id='1';
+        SELECT * FROM employment INNER JOIN users ON employment.user_id=users.id WHERE user_id=(SELECT id FROM users WHERE email='<%=  session.getAttribute("email") %>');
     </sql:query>
         
           <sql:query var="usersEducation"   dataSource="${myDS}">
-        SELECT * FROM education INNER JOIN users ON education.user_id=users.id WHERE user_id='1';
+               SELECT * FROM education INNER JOIN users ON education.user_id=users.id WHERE user_id=(SELECT id FROM users WHERE email='<%=  session.getAttribute("email") %>');
+        
     </sql:query>
 <h1>Profile Information</h1>
 
