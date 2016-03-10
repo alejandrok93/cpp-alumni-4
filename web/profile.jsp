@@ -21,7 +21,7 @@
                SELECT * FROM education INNER JOIN users ON education.user_id=users.id WHERE user_id=(SELECT id FROM users WHERE email='<%=  session.getAttribute("email") %>');
         
     </sql:query>
-<h1>Profile Information</h1>
+<h1 class="h1 text-center">Profile Information</h1>
 
 
 <center>
@@ -52,9 +52,7 @@
                     </tr>
                     <tr>
                         <td>
-                           <form action="<%= response.encodeURL(request.getContextPath() + "/personal_info.jsp")%>" method="post">
-                                <input type="submit" value="Edit">
-                            </form>
+                           
                         </td>
                        
                     </tr>
@@ -160,6 +158,9 @@
                            
 
                                 </table>
+                            <form action="personal_info.jsp" method="post">
+                                <input class="btn btn-warning" type="submit" value="Edit Profile">
+                            </form>
 
                             </fieldset>
                         </div>

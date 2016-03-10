@@ -11,25 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author alejandrok
  */
-public class UpdateAccountServlet extends HttpServlet {
-    
-    Controller ctrl = new Controller();
-    String phone;
-    String desc;
-    String employer;
-    String position;
-    String workPhone;
-    String institution;
-    String degree;
-    String major;
-    String graduationYear;
-            
+public class SearchServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,45 +29,13 @@ public class UpdateAccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
         
         
-        System.out.println("req.getparameter  : " + request.getParameter("type"));
-        String t = request.getParameter("type").toString();
-        System.out.println(" t : " + t);
+        String email = request.getParameter("userEmail");
+        response.setHeader("userEmail", email);
         
-        
-        if (t.equals("personal_info")) {
-        //UPDATE PERSONAL INFO
-        phone = request.getParameter("phone");
-        desc = request.getParameter("desc");
-        
-        String email = (String) session.getAttribute("email");
-        ctrl.updatePersonalInfo(email, phone, desc);
-        response.sendRedirect("profile.jsp");
-        
-        }
-        
-        if (t.equals("work_info")) {
-        //UPDATE WORK INFO
-        employer = request.getParameter("employer");
-        position = request.getParameter("position");
-        workPhone = request.getParameter("workPhone");
-        
-        String email = (String) session.getAttribute("email");
-        ctrl.updateWorkInfo(email, employer, position, workPhone);
-        response.sendRedirect("profile.jsp");
-        }
-        
-        
-        if (t.equals("education_info")) {
-        //UPDATE EDUCATION INFO
-        institution = request.getParameter("institution");
-        degree = request.getParameter("degree");
-        major = request.getParameter("major");
-        graduationYear = request.getParameter("graduationYear");
-        }
+        response.sendRedirect("search.jsp");
         
         
     }

@@ -12,7 +12,7 @@
         var="myDS"
         driver="com.mysql.jdbc.Driver"
         url="jdbc:mysql://localhost:3306/cpp-alumni"
-        user="root" password="sesame"
+        user="alejandro" password="Test123"
     />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
@@ -27,6 +27,7 @@ Need classes to import a DB request, then need to pull up the USER info
        <style>
             .container {
                 margin: 10%;
+                padding: 10%
             }
             
              td {
@@ -34,8 +35,8 @@ Need classes to import a DB request, then need to pull up the USER info
 }
 
 img {
-    height: 20%;
-    width: 20%;
+    height: 10%;
+    width: 10%;
 }
             </style>
     
@@ -57,9 +58,9 @@ img {
       <a class="navbar-brand" href="<%= request.getContextPath()%>/home.jsp">CPP Alumni Network</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Logout</a></li>
-      <li><a href="#">Search</a></li>
+      <li><a href="home.jsp">Home</a></li>
+      <li><a href="index.jsp">Logout</a></li>
+      <li><a href="search.jsp">Search</a></li>
       <li><a href="profile.jsp">Profile</a></li>
       <li><a href="#">Friends</a></li>
     </ul>

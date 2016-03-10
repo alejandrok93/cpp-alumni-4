@@ -28,12 +28,13 @@
                         
                         --%>
                         
-                        <form action="<%= response.encodeURL("workInfoServlet")%>" method="post">
+                        <form action="UpdateAccountServlet" method="post">
+                             <input type="hidden" value="work_info" name="type">
                             <table cellspacing="5" border="0">
 
                                 <tr>
                                     <td align="left">Employer:</td>
-                                    <td><input type="text" name="currentEmployer" size="50"></td>
+                                    <td><input type="text" name="employer" size="50"></td>
                                 </tr>
                                 <tr>
                                     <td align="left">Position:</td>

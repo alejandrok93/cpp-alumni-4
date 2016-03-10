@@ -16,8 +16,8 @@ import java.util.HashSet;
 public class Controller {
     
     private String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    private String username = "root";
-    private String pass = "sesame";
+    private String username = "alejandro";
+    private String pass = "Test123";
     
     public void Controller() {
         
@@ -87,7 +87,7 @@ public class Controller {
         for (Throwable t : e )
             t.printStackTrace();
     }
-            System.out.println("returned conn obj");
+           
            return conn;
     
     }
@@ -141,25 +141,33 @@ public class Controller {
         return exists;
     }
     
-    public boolean doesPasswordExist(String password) {
+    public boolean doesPasswordExist(String email, String password) {
         
           boolean passExists = false;
     try {
         //prepare SQL query and execute
-        String query = "SELECT * FROM users WHERE password = " + "\'" + password + "\'";
+      String query = "SELECT * FROM users WHERE password = " + "\'" + password + "\'";
          
         Connection conn = connectToDB();
         conn = DriverManager.getConnection(DBurl, username, pass);
         Statement stmt = conn.createStatement();
-       
+       ResultSet result = stmt.executeQuery(query);
         
-      
-        System.out.println(password);
-        System.out.println("executed query");
-        ResultSet result = stmt.executeQuery(query);
        
-        
-        if (result.first()) {
+      // PreparedStatement ps = conn.prepareStatement(query);
+       //ps.setString(1, password);
+        //ResultSet result = ps.executeQuery(query);
+
+        if (result.next()) {
+            String p = result.getString("password");
+     
+            if (password.equals(p)) {
+                System.out.println("passwords are equal");
+                passExists = true;
+               
+            }
+            
+            //temporary
             System.out.println("result exists");
             passExists = true;
         }
@@ -218,21 +226,21 @@ public class Controller {
     }
     
     
-    public void updatePersonalInfo(int userID, String phone, String description) {
+    public void updatePersonalInfo(String email, String phone, String description) {
         
         try {
         //connect to DB
         Connection conn = connectToDB();
         conn = DriverManager.getConnection(DBurl, username, pass);
         
-        String query = "UPDATE users SET phone = ?, description = ? WHERE id = ?";
+        String query = "UPDATE users SET phone = ?, description = ? WHERE email = ?";
  
         PreparedStatement ps = conn.prepareStatement(query);
         
         
         ps.setString(1, phone);
         ps.setString(2, description);
-        ps.setInt(3, userID);
+        ps.setString(3, email);
         
         ps.executeUpdate();
         
@@ -244,6 +252,41 @@ public class Controller {
         }
         
     }
+    
+    public void updateWorkInfo(String email, String employer, String position, String workPhone) {
+        
+        try {
+        //connect to DB
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, username, pass);
+        
+        String query = "UPDATE employment SET employer = ?, position = ?, work_phone = ? WHERE user_id = ?";
+        
+        
+        String q = "INSERT INTO employment (user_id, employer, position, work_phone, email )" +
+                   "VALUES (?, ?, ?, ?, ?)";
+                
+ 
+        
+        PreparedStatement ps = conn.prepareStatement(q);
+               ps.setString(1, email);
+               ps.setString(2, employer);
+               ps.setString(3, position);
+               ps.setString(4, workPhone);
+               ps.setString(5, email);
+ 
+        ps.executeUpdate();
+        
+        }
+        
+        catch (SQLException e) {
+            e.getMessage();
+        }
+        
+    }
+   
+
+
 
 
 }

@@ -59,16 +59,10 @@ public class LoginServlet extends HttpServlet {
     
      
     boolean emailExists =  ctrl.doesEmailExist(email);
-    boolean passExists = ctrl.doesPasswordExist(password);
+    boolean passExists = ctrl.doesPasswordExist(email, password);
         
      
     if (emailExists && passExists) {
-        
-       User user = ctrl.getUser(email);
-       System.out.println("firstname: "  + user.getFirstName());
-         System.out.println();
-           System.out.println();
-             System.out.println();
        
         synchronized(session) {
             session.setAttribute("email", email);

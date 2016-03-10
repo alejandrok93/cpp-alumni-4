@@ -31,6 +31,7 @@
                         --%>
                         
                         <form action="UpdateAccountServlet" method="post">
+                            <input type="hidden" value="personal_info" name="type">
                             <table cellspacing="5" border="0">
                                 <tr>
                                     <td align="left">First Name: *</td>
