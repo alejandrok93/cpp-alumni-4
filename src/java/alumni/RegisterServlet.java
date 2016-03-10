@@ -52,6 +52,9 @@ public class RegisterServlet extends HttpServlet {
         
         }
        
+        if (ctrl.doesEmailExist(email)) {
+            error += "Email already exists.";
+        }
         
         
         if (diplomaLastName.equals("")) {  
@@ -64,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
         
         if (!password.equals(password2)) {
             error += "Passwords are not equal. Please Try again.  ";
-            error += "\n";
+           
         }
         
         

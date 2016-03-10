@@ -32,7 +32,7 @@
                             <table cellspacing="5" border="0">
 
                                 <tr>
-                                    <td align="left">Current Employer:</td>
+                                    <td align="left">Employer:</td>
                                     <td><input type="text" name="currentEmployer" size="50"></td>
                                 </tr>
                                 <tr>

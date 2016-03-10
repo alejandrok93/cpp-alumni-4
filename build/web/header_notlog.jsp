@@ -11,8 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
        <style>
-            .container {
-                margin: 10%;
+            #container {
+                margin: 5%;
+                padding: 10%;
             }
             </style>
     
@@ -20,12 +21,12 @@
     <body>
         <div id="pagewidth">
             
-            <div class="head">
+            <div class="page-header">
                 <a href="<%= request.getContextPath()%>/index.jsp">
                     
                     <image src="<%= request.getContextPath()%>/img/cpp_logo.png" style="float: left; padding-left: 5px; padding-top: 5px;"/></a>
                 <br>
                
-                    <a class="header" href="<%= request.getContextPath()%>/index.jsp">&nbsp;&nbsp;CPP Alumni Network</a>
+                    <a class="h1" href="index.jsp">CPP Alumni Network</a>
             
             </div>

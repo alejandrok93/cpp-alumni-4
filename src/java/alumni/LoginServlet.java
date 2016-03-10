@@ -11,8 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.sql.*;
 import javax.servlet.*;
+
 
 /**
  *
@@ -36,10 +38,22 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    protected void getUser(String email) {
+        //call controller method to get user data
+        
+        
+        
+        //
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
        
+         HttpSession session = request.getSession();
+         
+         
+         
         email = request.getParameter("email");
      password = request.getParameter("password");
     
@@ -49,30 +63,28 @@ public class LoginServlet extends HttpServlet {
         
      
     if (emailExists && passExists) {
+        
+       User user = ctrl.getUser(email);
+       System.out.println("firstname: "  + user.getFirstName());
+         System.out.println();
+           System.out.println();
+             System.out.println();
+       
+        synchronized(session) {
+            session.setAttribute("user", user);
+        }
+        
         response.sendRedirect("home.jsp");
         
     }
     
     else {
+  
         String error = "Email or Password not found. Try again";
         response.sendRedirect("log_in.jsp?error=" + error);
-     
+ 
     }
-        
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. 
-            Need to check if is actual user then pass user info to the header_user.jsp
-            */
-//          String url = response.encodeURL("/home.jsp");
-//            RequestDispatcher dispatcher =
-//                    getServletContext().getRequestDispatcher(url);
-//            dispatcher.forward(request, response);
-            
-            out.print(emailExists);
-            out.print(passExists);
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -15,7 +15,8 @@
     
     <style>
          img {
-             centerheight:  20%;
+             center
+        height:  20%;
         width: 20%;
         display: block;
     margin: 0 auto;

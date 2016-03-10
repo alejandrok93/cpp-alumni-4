@@ -43,7 +43,7 @@ public class UpdateAccountServlet extends HttpServlet {
         int userID = 11;
         
   
-        ctrl.updateAccount(userID, phone, desc);
+        ctrl.updatePersonalInfo(userID, phone, desc);
         
         
         response.sendRedirect("profile.jsp");

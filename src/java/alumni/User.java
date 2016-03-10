@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 public class User {
  
-    private Long userId;
+    private int userId;
     private String email;
     private String firstName;
     private String lastName;
@@ -27,11 +27,11 @@ private String major;
 private String phone;
  private String description;
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     

@@ -7,7 +7,7 @@ package alumni;
 
 import java.sql.*;
 import java.util.HashSet;
-import java.util.Set;
+
 
 /**
  *
@@ -15,12 +15,40 @@ import java.util.Set;
  */
 public class Controller {
     
-    String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    String user = "root";
-    String pass = "sesame";
+    private String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
+    private String username = "alejandro";
+    private String pass = "Test123";
     
     public void Controller() {
         
+    }
+    
+    public User getUser(String email) {
+       
+        User user = new User();
+        try {
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, username, pass);
+        String query = "SELECT * FROM users WHERE email = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()) {
+            
+            
+            user.setUserId(rs.getInt("id"));
+            user.setFirstName(rs.getString("first_name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setEmail(rs.getString("email"));
+   
+        }
+
+        }
+
+        catch(SQLException e ) {
+            e.getMessage();
+        }
+        return user;
     }
     
     @SuppressWarnings("empty-statement")
@@ -39,7 +67,7 @@ public class Controller {
     
     
    
-    conn = DriverManager.getConnection(DBurl, user, pass);
+    conn = DriverManager.getConnection(DBurl, username, pass);
     
    
    
@@ -81,7 +109,7 @@ public class Controller {
         String query = "SELECT * FROM users WHERE email = " + "\'" + email + "\'";
          
         Connection conn = connectToDB();
-        conn = DriverManager.getConnection(DBurl, user, pass);
+        conn = DriverManager.getConnection(DBurl, username, pass);
         Statement stmt = conn.createStatement();
        
         
@@ -121,7 +149,7 @@ public class Controller {
         String query = "SELECT * FROM users WHERE password = " + "\'" + password + "\'";
          
         Connection conn = connectToDB();
-        conn = DriverManager.getConnection(DBurl, user, pass);
+        conn = DriverManager.getConnection(DBurl, username, pass);
         Statement stmt = conn.createStatement();
        
         
@@ -162,7 +190,7 @@ public class Controller {
        try {
         //connect to DB
         Connection conn = connectToDB();
-        conn = DriverManager.getConnection(DBurl, user, pass);
+        conn = DriverManager.getConnection(DBurl, username, pass);
         
         String query = "INSERT INTO users "
                 + "(first_name, last_name, email, password, year_graduated, degree, major)"
@@ -190,12 +218,12 @@ public class Controller {
     }
     
     
-    public void updateAccount(int userID, String phone, String description) {
+    public void updatePersonalInfo(int userID, String phone, String description) {
         
         try {
         //connect to DB
         Connection conn = connectToDB();
-        conn = DriverManager.getConnection(DBurl, user, pass);
+        conn = DriverManager.getConnection(DBurl, username, pass);
         
         String query = "UPDATE users SET phone = ?, description = ? WHERE id = ?";
  

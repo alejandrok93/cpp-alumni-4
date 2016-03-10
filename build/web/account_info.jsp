@@ -23,7 +23,7 @@
                         </ul>
                     </div>
                     <div id="main-container">
-                        <form action="<%= response.encodeURL("UpdateAccountServlet")%>" method="post">
+                        <form action="<%= response.encodeURL("userInfoServlet")%>" method="post">
                             <table cellspacing="5" border="0">
                                 <tr>
                                     <td align="left">Email: </td>
