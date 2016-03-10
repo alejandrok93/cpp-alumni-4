@@ -17,7 +17,7 @@
     />
      
     <sql:query var="listUsers"   dataSource="${myDS}">
-        SELECT * FROM users WHERE email='<%=  session.getAttribute("user") %>';
+        SELECT * FROM users WHERE email='<%=  session.getAttribute("email") %>';
     </sql:query>
       
             <sql:query var="usersWork"   dataSource="${myDS}">
@@ -48,7 +48,7 @@
                     
                                  </c:forEach> 
                         <td>&nbsp;</td>
-                        <td>&nbsp;<%=  session.getAttribute("user") %></td>
+                        <td>&nbsp;</td>
 
                     </tr>
                     <tr>

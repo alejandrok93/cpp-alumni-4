@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
              System.out.println();
        
         synchronized(session) {
-            session.setAttribute("user", user);
+            session.setAttribute("email", email);
         }
         
         response.sendRedirect("home.jsp");

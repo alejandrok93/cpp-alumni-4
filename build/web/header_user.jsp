@@ -32,6 +32,7 @@ img {
         <title>JSP Page</title>
     </head>
     <body>
+       
         <div class="head">
                 <a href="<%= request.getContextPath()%>/home.jsp">
                     
