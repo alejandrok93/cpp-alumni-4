@@ -16,8 +16,8 @@ import java.util.HashSet;
 public class Controller {
     
     private String DBurl = "jdbc:mysql://localhost:3306/cpp-alumni";
-    private String username = "alejandro";
-    private String pass = "Test123";
+    private String username = "root";
+    private String pass = "sesame";
     
     public void Controller() {
         
