@@ -260,7 +260,7 @@ public class Controller {
         Connection conn = connectToDB();
         conn = DriverManager.getConnection(DBurl, username, pass);
         
-        String query = "UPDATE employment SET employer = ?, position = ?, work_phone = ? WHERE user_id = ?";
+        //String query = "UPDATE employment SET employer = ?, position = ?, work_phone = ? WHERE user_id = ?";
         
         
         String q = "INSERT INTO employment (user_id, employer, position, work_phone, email )" +
@@ -274,6 +274,38 @@ public class Controller {
                ps.setString(3, position);
                ps.setString(4, workPhone);
                ps.setString(5, email);
+ 
+        ps.executeUpdate();
+        
+        }
+        
+        catch (SQLException e) {
+            e.getMessage();
+        }
+        
+    }
+    
+    public void updateEducationInfo(String email, String yearGraduated, 
+            String degree, String major, String institution) {
+        
+        try {
+        //connect to DB
+        Connection conn = connectToDB();
+        conn = DriverManager.getConnection(DBurl, username, pass);
+        
+        
+        
+        String q = "INSERT INTO education (user_id, year_graduated, degree, major, institution) " +
+                   "VALUES (?, ?, ?, ?, ?)";
+                
+ 
+        
+        PreparedStatement ps = conn.prepareStatement(q);
+               ps.setString(1, email);
+               ps.setString(2, yearGraduated);
+               ps.setString(3, degree);
+               ps.setString(4, major);
+               ps.setString(5, institution);
  
         ps.executeUpdate();
         

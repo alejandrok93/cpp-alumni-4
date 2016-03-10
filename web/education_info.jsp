@@ -26,7 +26,8 @@
 
                     <div id="main-container">
                         <br><br>
-                        <form action="<%= response.encodeURL("userInfoServlet")%>" method="post">
+                        <form action="UpdateAccountServlet" method="post">
+                             <input type="hidden" value="education_info" name="type">
                             <table cellspacing="5" border="0">
                                 <tr>
                                     <td align="left" width="150">Institution: </td>

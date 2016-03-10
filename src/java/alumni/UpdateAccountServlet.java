@@ -79,6 +79,10 @@ public class UpdateAccountServlet extends HttpServlet {
         degree = request.getParameter("degree");
         major = request.getParameter("major");
         graduationYear = request.getParameter("graduationYear");
+        
+        String email = (String) session.getAttribute("email");
+        ctrl.updateEducationInfo(email, graduationYear, degree, major, institution);
+        response.sendRedirect("profile.jsp");
         }
         
         
